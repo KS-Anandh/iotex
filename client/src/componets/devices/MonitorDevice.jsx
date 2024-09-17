@@ -15,7 +15,7 @@ const MonitorDevice = ({
   const [level, setLevel] = useState(Alevel);
   setInterval(() => {
     axios
-      .get(`http://localhost:9700/device/device/${deviceId}`)
+      .get(`https://iotex-ajgn.vercel.app/device/device/${deviceId}`)
       .then((res) => setLevel(res.data.deviceLevel))
       .catch((err) => {
         console.log(err);
@@ -26,7 +26,7 @@ const MonitorDevice = ({
       try {
         axios
           .delete(
-            `http://localhost:9700/device/delete/${projectId}/${deviceId}`
+            `https://iotex-ajgn.vercel.app/device/delete/${projectId}/${deviceId}`
           )
           .then((res) => {
             toast.success("Deletion success", {

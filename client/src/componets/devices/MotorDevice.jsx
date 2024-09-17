@@ -17,7 +17,7 @@ const MotorDevice = ({
   const [status, setStatus] = useState(Astatus);
   useEffect(() => {
     axios
-      .put(`http://localhost:9700/device/update/${deviceId}`, {
+      .put(`https://iotex-ajgn.vercel.app/device/update/${deviceId}`, {
         deviceStatus: status,
         deviceLevel: level,
       })
@@ -33,7 +33,7 @@ const MotorDevice = ({
       try {
         axios
           .delete(
-            `http://localhost:9700/device/delete/${projectId}/${deviceId}`
+            `https://iotex-ajgn.vercel.app/device/delete/${projectId}/${deviceId}`
           )
           .then((res) => {
             toast.success(res.data, {

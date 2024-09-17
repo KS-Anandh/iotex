@@ -23,7 +23,7 @@ const AddProject = () => {
    const token = localStorage.getItem("token");
     axios
       .post(
-        "http://localhost:9700/projects/add",
+        "https://iotex-ajgn.vercel.app/projects/add",
         { name: projectName, description: desc },
         { headers: { token: token } }
       )

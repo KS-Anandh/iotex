@@ -49,7 +49,7 @@ const Register = () => {
     if (parseInt(userOtp)=== otp) {
       try {
         axios
-          .post("http://localhost:9700/users/register", {
+          .post("https://iotex-ajgn.vercel.app/users/register", {
             userName,
             userMail: user.toLowerCase(),
             userPass: pass,

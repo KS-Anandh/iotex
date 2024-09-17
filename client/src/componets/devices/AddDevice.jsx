@@ -21,7 +21,7 @@ const AddDevice = () => {
   const addDeviceHandler = () => {
     try {
       axios
-        .post(`http://localhost:9700/device/add/${id}`, {
+        .post(`https://iotex-ajgn.vercel.app/device/add/${id}`, {
           deviceName,
           deviceCategory: category,
         })

@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Dash = () => {
   const nav=useNavigate("/")
   const [devices,setDevices]=useState([]);
+  const [isLoading,setLoading]=useState(false);
   const {id}=useParams();
   const {navState,setNavState,data,setData}=useContext(GlobalContext);
   useEffect(()=>{
@@ -18,9 +19,11 @@ const Dash = () => {
     if(!token){
       nav("/");
     }
-    axios.get(`http://localhost:9700/projects/project/${id}`)
+    setLoading(true);
+    axios.get(`https://iotex-ajgn.vercel.app/projects/project/${id}`)
     .then((res)=>{
       setDevices(res.data)
+      setLoading(false)
     })
     .catch((err)=>{
       console.log(err)
@@ -32,6 +35,9 @@ const Dash = () => {
    <Link to={`/projects`}><button style={{margin:"20px 5px",width:"150px",height:"40px",background:"rgb(105, 229, 200)",fontSize:"18px",border:"none",color:"darkblue",borderRadius:"30px 0px 0px 30px"}}>{'Go to Projects'}</button></Link>
     {devices.length==0?<center style={{margin:'30px 0px'}}>-- NOT DEVICES FOUND YET --</center>:""}
     <div className='dash'>
+      {
+        isLoading?<div style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%",padding:"50px"}}><center style={{fontSize:"25px"}}>Loading ....</center></div>:""
+      }
       {
         devices.map((item,key)=>{
           return(

@@ -10,7 +10,7 @@ const LedDevice = ({setDevices,deviceName,deviceId,Alevel,Astatus,projectId}) =>
   const [level,setLevel]=useState(Alevel);
     const [status,setStatus]=useState(Astatus);
     useEffect(()=>{
-        axios.put(`http://localhost:9700/device/update/${deviceId}`,{deviceStatus:status,deviceLevel:level})
+        axios.put(`https://iotex-ajgn.vercel.app/device/update/${deviceId}`,{deviceStatus:status,deviceLevel:level})
         .then((res)=>{
           console.log("updated")
         })
@@ -21,7 +21,7 @@ const LedDevice = ({setDevices,deviceName,deviceId,Alevel,Astatus,projectId}) =>
     const deleteHandler=()=>{
       if(confirm("You want to delete Device")){
         try{
-          axios.delete(`http://localhost:9700/device/delete/${projectId}/${deviceId}`)
+          axios.delete(`https://iotex-ajgn.vercel.app/device/delete/${projectId}/${deviceId}`)
           .then((res)=>{
             toast.success("Deletion Success", {
               position: "top-right",

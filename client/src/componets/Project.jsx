@@ -9,11 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 const Project = () => {
 
 const [projects,setProjects]=useState([]);
+const [isLoading,setLoading]=useState(false);
   const nav=useNavigate();
  const deteleHandler=(id)=>{
   const token=localStorage.getItem("token")
      if( confirm("Do You Want to Delete ")){
-      axios.delete(`http://localhost:9700/projects/delete/${id}`,{headers:{token:token}})
+      axios.delete(`https://iotex-ajgn.vercel.app/projects/delete/${id}`,{headers:{token:token}})
       .then((res)=>{
         toast.success(res.data, {
           position: "top-right",
@@ -59,10 +60,13 @@ const [projects,setProjects]=useState([]);
     if(!token){
       nav("/");
     }
-    axios.get("http://localhost:9700/projects/id",{
+    setLoading(true)
+    axios.get("https://iotex-ajgn.vercel.app/projects/id",{
       headers:{token:token}})
     .then((res)=>{
+      setLoading(false)
       setProjects(res.data)
+
     })
     .catch((err)=>{console.log("error")})
     
@@ -83,6 +87,9 @@ const [projects,setProjects]=useState([]);
         })
       }
       {projects.length==0?<center style={{margin:"30px 0px"}}>NO PROJECTS YET</center>:""}
+      {
+        isLoading?<div style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%",padding:"50px"}}><center style={{fontSize:"25px"}}>Loading ....</center></div>:""
+      }
         <div className='addDevice'>
               <p>Create New Project to add all devices in one place</p>
            <Link to="/addProject"><div><img src={add} /></div></Link> 

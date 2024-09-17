@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Switch = ({deviceName,Astatus,deviceId,projectId,setDevices}) => {
     const [status,setStatus]=useState(Astatus);
     useEffect(()=>{
-      axios.put(`http://localhost:9700/device/update/${deviceId}`,{deviceStatus:status})
+      axios.put(`https://iotex-ajgn.vercel.app/device/update/${deviceId}`,{deviceStatus:status})
       .then((res)=>{
         console.log("updated")
       })
@@ -22,7 +22,7 @@ const Switch = ({deviceName,Astatus,deviceId,projectId,setDevices}) => {
   const deleteHandler=()=>{
     if(confirm("You want to delete Device")){
       try{
-        axios.delete(`http://localhost:9700/device/delete/${projectId}/${deviceId}`)
+        axios.delete(`https://iotex-ajgn.vercel.app/device/delete/${projectId}/${deviceId}`)
         .then((res)=>{
           toast.success("Deletion Success", {
             position: "top-right",
