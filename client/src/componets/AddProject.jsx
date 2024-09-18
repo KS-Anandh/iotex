@@ -11,6 +11,7 @@ const AddProject = () => {
 
   const [projectName, setProjectName] = useState(null);
   const [desc, setDesc] = useState(null);
+  const [wait,setWait]=useState(false);
 
   //axios method to create project and we want update to context data.
   useEffect(()=>{
@@ -20,6 +21,7 @@ const AddProject = () => {
     }
   },[])
   const handler = () => {
+    setWait(true);
    const token = localStorage.getItem("token");
     axios
       .post(
@@ -28,6 +30,7 @@ const AddProject = () => {
         { headers: { token: token } }
       )
       .then((res) => {
+        setWait(false);
         toast.success("New Project Created ", {
           position: "top-right",
           autoClose: 2000,
@@ -63,9 +66,9 @@ const AddProject = () => {
         required
       />
       <div style={{ display: "flex", alignItems: "center", columnGap: "20px" }}>
-        <button className="login-btn" onClick={handler}>
-          Create Project
-        </button>
+        {
+         !wait?<button className="login-btn" onClick={handler}> Create Project </button>:<p>Wait...</p>
+        }
         <Link to="/projects">
           {" "}
           <p style={{ color: "darkblue" }}>{`Projects >>>`}</p>
