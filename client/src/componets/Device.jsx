@@ -13,7 +13,7 @@ const Device = ({setDevices,deviceName,deviceId,Alevel,Astatus,category,projectI
  const [status,setStatus]=useState(Astatus);
   return (
     <>
-      {category==1?<LedDevice setDevices={setDevices} deviceId={deviceId} projectId={projectId} deviceName={name} Alevel={level} setLevel={setLevel} status={status} setStatus={setStatus}/>:category==2?<MotorDevice projectId={projectId} deviceId={deviceId}setStatus={setStatus} setLevel={setLevel} deviceName={name} Alevel={level} status={status} setDevices={setDevices}/>:category==3?<MonitorDevice projectId={projectId} deviceId={deviceId} setStatus={setStatus} setLevel={setLevel}  deviceName={name} Alevel={level} status={status} setDevices={setDevices}/>:category==4?<Switch projectId={projectId} deviceId={deviceId} setStatus={setStatus} setLevel={setLevel} deviceName={name} level={level}  status={status} setDevices={setDevices}/>:""}
+      {category==1?<LedDevice setDevices={setDevices} deviceId={deviceId} projectId={projectId} deviceName={name} Alevel={level} setLevel={setLevel} Astatus={status} setStatus={setStatus}/>:category==2?<MotorDevice projectId={projectId} deviceId={deviceId}setStatus={setStatus} setLevel={setLevel} deviceName={name} Alevel={level} Astatus={status} setDevices={setDevices}/>:category==3?<MonitorDevice projectId={projectId} deviceId={deviceId} setStatus={setStatus} setLevel={setLevel}  deviceName={name} Alevel={level} Astatus={status} setDevices={setDevices}/>:category==4?<Switch projectId={projectId} deviceId={deviceId} setStatus={setStatus} setLevel={setLevel} deviceName={name} level={level}  Astatus={status} setDevices={setDevices}/>:""}
     </>
   )
   
