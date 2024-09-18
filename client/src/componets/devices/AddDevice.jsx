@@ -25,7 +25,7 @@ const AddDevice = () => {
       axios
         .post(`https://iotex-ajgn.vercel.app/device/add/${id}`, {
           deviceName,
-          deviceCategory: category,
+          deviceCategory:category,
         })
         .then((res) => {
           setWait(false);
