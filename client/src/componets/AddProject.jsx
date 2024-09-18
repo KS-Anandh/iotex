@@ -30,7 +30,6 @@ const AddProject = () => {
         { headers: { token: token } }
       )
       .then((res) => {
-        setWait(false);
         toast.success("New Project Created ", {
           position: "top-right",
           autoClose: 2000,
@@ -42,6 +41,7 @@ const AddProject = () => {
           theme: "light"
           });
           setTimeout(()=>{
+             setWait(false);
             navigate("/projects");
           },2000)
       })
