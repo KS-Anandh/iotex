@@ -12,7 +12,7 @@ const AddDevice = () => {
   const { navState, setNavState, data, setData } = useContext(GlobalContext);
   const [category, setCategory] = useState(null);
   const [deviceName, setDeviceName] = useState(null);
-  const [wait,setWait]=useState(false):
+  const [wait,setWait]=useState(false);
   useEffect(()=>{
     const token=localStorage.getItem("token");
     if(!token){
