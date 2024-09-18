@@ -14,6 +14,7 @@ const Register = () => {
   const [userName, setUserName] = useState(null);
   const [verifyPass, setVerifyPass] = useState(-1);
   const [user, setUser] = useState(-1);
+  const [wait,setWait]=useState(false);
   const OtpSender = async () => {
     const GeneratedOtp=Math.floor(Math.random()*10000)
     setOtp(GeneratedOtp);
@@ -47,7 +48,9 @@ const Register = () => {
   };
   const registerHandler = async () => {
     if (parseInt(userOtp)=== otp) {
+      
       try {
+        setWait(true);
         axios
           .post("https://iotex-ajgn.vercel.app/users/register", {
             userName,
@@ -66,6 +69,7 @@ const Register = () => {
               theme: "light"
               });
               setTimeout(()=>{
+                setWait(false);
                 nav("/")
               },2000)             
           })
@@ -156,9 +160,9 @@ const Register = () => {
       ) : (
         <></>
       )}
-      <button className="login-btn" onClick={registerHandler}>
-        Register
-      </button>
+      {
+        !wait?<button className="login-btn" onClick={registerHandler}>Register</button>:<button className="login-btn" style={{background:"red",color:"white"}} >Loading...</button>
+      }
       <Link to="/">
         <p style={{ color: "darkblue", fontSize: 20, margin: "20px 0px" }}>
           Already I have Account ?
