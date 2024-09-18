@@ -12,6 +12,7 @@ const AddDevice = () => {
   const { navState, setNavState, data, setData } = useContext(GlobalContext);
   const [category, setCategory] = useState(null);
   const [deviceName, setDeviceName] = useState(null);
+  const [wait,setWait]=useState(false):
   useEffect(()=>{
     const token=localStorage.getItem("token");
     if(!token){
@@ -19,6 +20,7 @@ const AddDevice = () => {
     }
   },[])
   const addDeviceHandler = () => {
+    setWait(true);
     try {
       axios
         .post(`https://iotex-ajgn.vercel.app/device/add/${id}`, {
@@ -26,6 +28,7 @@ const AddDevice = () => {
           deviceCategory: category,
         })
         .then((res) => {
+          setWait(false);
           toast.success(res.data, {
             position: "top-right",
             autoClose: 2000,
@@ -41,6 +44,7 @@ const AddDevice = () => {
           }, 2000);
         })
         .catch((err) => {
+          setWait(false);
           toast.error("Something went wrong", {
             position: "top-right",
             autoClose: 3000,
@@ -82,9 +86,9 @@ const AddDevice = () => {
         required
       />
       <div style={{ display: "flex", alignItems: "center", columnGap: "20px" }}>
-        <button className="login-btn" onClick={addDeviceHandler}>
-          Add Device
-        </button>
+        {
+          !wait?<button className="login-btn" onClick={addDeviceHandler}>Add Device </button>:<button className="login-btn" style={{background:"red",color:"white"}}>Loading... </button>
+        }
         <Link to={`/dash/${id}`}>
           {" "}
           <p style={{ color: "darkblue" }}>{`Dashboard - >`}</p>
