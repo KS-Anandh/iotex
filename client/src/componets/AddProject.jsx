@@ -67,7 +67,7 @@ const AddProject = () => {
       />
       <div style={{ display: "flex", alignItems: "center", columnGap: "20px" }}>
         {
-         !wait?<button className="login-btn" onClick={handler}> Create Project </button>:<p>Wait...</p>
+         !wait?<button className="login-btn" onClick={handler}> Create Project </button>:<button className="login-btn" style={{color:"red"}}> Loading </button>
         }
         <Link to="/projects">
           {" "}
