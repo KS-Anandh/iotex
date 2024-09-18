@@ -28,7 +28,6 @@ const AddDevice = () => {
           deviceCategory:category,
         })
         .then((res) => {
-          setWait(false);
           toast.success(res.data, {
             position: "top-right",
             autoClose: 2000,
@@ -40,6 +39,7 @@ const AddDevice = () => {
             theme: "light",
           });
           setTimeout(() => {
+            setWait(false);
             navigate(`/dash/${id}`);
           }, 2000);
         })
