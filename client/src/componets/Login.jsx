@@ -11,6 +11,7 @@ const Login = ({setPage}) => {
 const {navState,setNavState}=useContext(GlobalContext);
 const [name,setName]=useState(null);
 const [pass,setPass]=useState(null);
+  const [wait,setWait]=useState(false);
   useEffect(()=>{
     setNavState(1);
     if(localStorage.getItem("token")){
@@ -19,6 +20,7 @@ const [pass,setPass]=useState(null);
   },[])
   const loginHandler=async()=>{
     try{
+    setWait(true);
     await axios.post("https://iotex-ajgn.vercel.app/users/login",{userMail:name.toLowerCase(),userPass:pass})
     .then((res)=>{
       localStorage.setItem("token",res.data);
@@ -33,10 +35,12 @@ const [pass,setPass]=useState(null);
         theme: "light"
         });
       setTimeout(()=>{
+        setWait(false);
         nav("/projects")
       },3000)
     })
     .catch((err)=>{
+      setWait(false);
       toast.error("Invalid Credintial", {
         position: "top-center",
         autoClose:3000,
@@ -69,7 +73,10 @@ const [pass,setPass]=useState(null);
         <input type="text" placeholder='Username' onChange={(e)=>setName(e.target.value)}/>
         <input type="password" placeholder='Password' onChange={(e)=>setPass(e.target.value)}/>
     {/* <Link to="/projects"> */}
-    <button className='login-btn' onClick={loginHandler}>Login</button>
+      {
+        wait?<button className='login-btn' style={{color:"white",background:"red"}}>Wait...</button>:<button className='login-btn' onClick={loginHandler}>Login</button>
+      }
+    
     {/* </Link>  */}
       <Link to="/register"> <p style={{color:"darkblue",fontSize:20,margin:"20px 0px"}}>New User ?</p></Link>
       <ToastContainer
