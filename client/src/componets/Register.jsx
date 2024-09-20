@@ -74,6 +74,7 @@ const Register = () => {
               },2000)             
           })
           .catch((err) => {
+            setWait(false);
             toast.error("Something went wrong", {
               position: "top-center",
               autoClose: 5000,
