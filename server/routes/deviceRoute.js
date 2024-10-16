@@ -78,5 +78,48 @@ device.get("/device/:id",async(req,res)=>{
         return res.status(500).json("Server error")
     }
 })
+device.get("/range/:id",async(req,res)=>{
+    const {id} =req.params;
+    try{
+        const data=await deviceModel.findOne({_id:id})
+        if(!data){
+            return res.status(500).json("Server error")
+        }
+        if(data.deviceStatus){
+            return res.status(200).json(data.deviceLevel)
+        }
+        return res.status(200).json(0);
+    }
+    catch{
+        return res.status(500).json("Server error")
+    }
+})
+device.get("/status/:id",async(req,res)=>{
+    const {id} =req.params;
+    try{
+        const data=await deviceModel.findOne({_id:id})
+        if(!data){
+            return res.status(500).json("Server error")
+        }
+        return res.status(200).json(data.deviceStatus)
+    }
+    catch{
+        return res.status(500).json("Server error")
+    }
+})
+device.put('/range/:id/:value',async(req,res)=>{
+    const deviceId=req.params.id;
+    const deviceRange=req.params.value;
+    try{
+        const update=await deviceModel.updateOne({_id:deviceId},{deviceLevel:deviceRange});
+        if(!update){
+            res.status(500).json("server error");
+        }
+        res.status(200).json("updated successfully");
+    }
+    catch(err){
+
+    }
+})
 
 export default device;
