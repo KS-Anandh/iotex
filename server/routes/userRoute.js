@@ -74,4 +74,39 @@ user.get("/",async(req,res)=>{
     }
     
 })
+user.post("/gmail", async (req, res) => {
+  const { userName, userMail } = req.body;
+  try {
+    const user = await userModel.findOne({ userMail });
+    if (!user) {
+      const user = await new userModel({
+        userName,
+        userMail,
+        userPass: "gmail",
+      });
+      const save = await user.save();
+      if (!save) {
+        return res.status(500).json("Somthing went Wrong");
+      } else {
+        const payload = {
+          id: user._id,
+          userName: user.userName,
+          userMail: user.userMail,
+        };
+        const token = jwt.sign(payload, "eciotex");
+        return res.status(200).json(token);
+      }
+    } else {
+      const payload = {
+        id: user._id,
+        userName: user.userName,
+        userMail: user.userMail,
+      };
+      const token = jwt.sign(payload, "eciotex");
+      return res.status(200).json(token);
+    }
+  } catch (err) {
+    res.status(500).json("server error");
+  }
+});
 export default user;
