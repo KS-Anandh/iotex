@@ -40,9 +40,9 @@ user.post('/login',async(req,res)=>{
     }
     catch(err){ res.status(500).json("server error from login"); }
 })
-user.get("/verify",auth,(req,res)=>{
-    res.status(200).json(req.header.token)
-})
+user.get("/verify", auth, (req, res) => {
+  res.status(200).json(req.body.user);
+});
 user.put('/forget',async(req,res)=>{
     const {userMail,newPass}=req.body;
     try{
