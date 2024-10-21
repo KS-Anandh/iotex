@@ -8,7 +8,7 @@ device.post("/add/:id",async(req,res)=>{
     const projectId=req.params.id
     const {deviceName,deviceCategory}=req.body;
     try{
-        const device= new deviceModel({deviceName,deviceCategory,deviceStatus:false,deviceLevel:5});
+        const device= new deviceModel({deviceName,deviceCategory,deviceStatus:false,deviceLevel:0});
         const status=await device.save();
         if(!status){
             res.status(500).json("Enter data Properly");
